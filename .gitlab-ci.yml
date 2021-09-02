@@ -1,6 +1,7 @@
-include:
-  - template: Dependency-Scanning.gitlab-ci.yml
-  - template: SAST.gitlab-ci.yml
-
-variables:
-  SAST_EXCLUDED_PATHS: "frontend/src/assets/private/**"
+semgrep:
+  image: returntocorp/semgrep-agent:v1
+  script: semgrep-agent
+  variables:
+    SEMGREP_APP_DEPLOYMENT_ID: 2689
+  rules:
+  - if: $CI_MERGE_REQUEST_IID
